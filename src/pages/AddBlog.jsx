@@ -1,7 +1,8 @@
 import React from "react";
+import AddNewBlog from "../components/AddNewBlog";
 
-const AddBlog = () => {
-  return <div>AddBlog</div>;
+const AddBlog = ({ addBlog }) => {
+  return <AddNewBlog addBlog={addBlog} />;
 };
 
 export default AddBlog;

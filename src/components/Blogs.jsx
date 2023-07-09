@@ -1,17 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 
-const Blogs = () => {
-  const [res, setRes] = useState([]);
-  async function getData() {
-    const { data } = await axios("https://jsonplaceholder.typicode.com/posts");
-    setRes(data);
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
+const Blogs = ({ blogs, deleteBlog }) => {
   return (
     <div>
       <h1 style={{ textAlign: "center", margin: "20px auto" }}>Blogs</h1>
@@ -23,11 +13,26 @@ const Blogs = () => {
           rowGap: "2rem",
         }}
       >
-        {res.map((item) => (
-          <Card style={{ width: "18rem" }}>
+        {blogs.map((item) => (
+          <Card key={item.id} style={{ width: "18rem", position: "relative" }}>
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
               <Card.Text>{item.body}</Card.Text>
+              <button
+                style={{
+                  position: "absolute",
+                  right: "5px",
+                  bottom: "5px",
+                  borderRadius: "5px",
+                  backgroundColor: "red",
+                  border: "none",
+                }}
+                onClick={() => {
+                  deleteBlog(item.id);
+                }}
+              >
+                Delete
+              </button>
             </Card.Body>
           </Card>
         ))}
